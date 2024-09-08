@@ -1,0 +1,34 @@
+{
+    "ASN": 2,
+    "router_name_set": [
+        "2.1",
+        "2.2",
+        "2.3"
+    ],
+    "router_distance_dict": {
+        "2.1": {
+            "2.2": 1,
+            "2.3": 1
+        },
+        "2.2": {
+            "2.1": 1,
+            "2.3": 1
+        },
+        "2.3": {
+            "2.1": 1,
+            "2.2": 1
+        }
+    },
+    "ip_router": {
+        "2.1.0.1": "2.1",
+        "2.1.0.2": "2.1",
+        "2.2.0.1": "2.2",
+        "2.2.0.2": "2.2"
+    },
+    "global_controller_address": {
+        "ip": "localhost",
+        "port": 2101
+    },
+    "global_controller_listen_port": 2211,
+    "input_listening_port": 2221
+}

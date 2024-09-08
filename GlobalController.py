@@ -3,6 +3,8 @@ from LocalController import LocalController
 from AStopology import AStopology
 import socket
 import pickle
+import argparse
+import json
 
 class GlobalController:
     '''
@@ -48,18 +50,33 @@ class GlobalController:
 
 if __name__ == '__main__':
     
+    parser = argparse.ArgumentParser(description='Global Controller')
+    parser.add_argument('--config', type=str, default='./config/globalConfig.json')
+    args = parser.parse_args()
+    config_file = args.config
+    config = json.load(open(config_file, 'r'))
+    cross_domain_links = config['cross_domain_links']
+    local_topo_listen_addr = config['local_topo_listen_address']
+    ASes = [int(key) for key in config['ASController_listen_addresses']]
+    ASController_listen_addresses = config['ASController_listen_addresses']
+    
     # 构建全局拓扑基本信息
     global_controller = GlobalController()
     
     # 添加所有AS号
-    global_controller.ASes.append(1)
-    global_controller.ASes.append(2)
+    for AS in ASes:
+        global_controller.ASes.append(AS)
+    # global_controller.ASes.append(1)
+    # global_controller.ASes.append(2)
     
     # 添加域间链路信息(须手动逐个添加)
-    global_controller.global_topology.cross_domain_links.append(['1.3', '2.3'])
+    for link in cross_domain_links:
+        global_controller.global_topology.cross_domain_links.append(link)
+    # global_controller.global_topology.cross_domain_links.append(['1.3', '2.3'])
     
     # 等待各个本地控制器上传本地拓扑信息
-    global_controller.listen_local_topology('localhost', 2101)
+    global_controller.listen_local_topology(local_topo_listen_addr['ip'], local_topo_listen_addr['port'])
+    # global_controller.listen_local_topology('localhost', 2101)
     
     # 重构字符串id到整数id的映射
     router_count = 0
@@ -74,8 +91,10 @@ if __name__ == '__main__':
             router_count += 1
             
     # 初始化各个本地控制器ip
-    global_controller.ASController_ip[1] = ['localhost', 2111]
-    global_controller.ASController_ip[2] = ['localhost', 2211]
+    for key, value in ASController_listen_addresses.items():
+        global_controller.ASController_ip[int(key)] = [value['ip'], value['port']]
+    # global_controller.ASController_ip[1] = ['localhost', 2111]
+    # global_controller.ASController_ip[2] = ['localhost', 2211]
 
     # 生成全局拓扑
     global_controller.global_topology.generate_global_topology()

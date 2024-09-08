@@ -1,0 +1,19 @@
+{
+    "cross_domain_links": [
+        ["1.3", "2.3"]
+    ],
+    "local_topo_listen_address": {
+        "ip": "localhost",
+        "port": 2101
+    },
+    "ASController_listen_addresses": {
+        "1": {
+            "ip": "localhost",
+            "port": 2111
+        },
+        "2": {
+            "ip": "localhost",
+            "port": 2211
+        }
+    }
+}
