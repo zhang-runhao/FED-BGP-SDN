@@ -131,10 +131,10 @@ class subNet1(torch.nn.Module):
 
         x = torch.cat([x, original_edge_index_source, original_edge_index_target], dim=-1)
         # print(f'x.shape: {x.shape}')
-        # hx = torch.randn(NODE_NUM_DIM)
-        # cx = torch.randn(NODE_NUM_DIM)
-        hx = torch.ones(NODE_NUM_DIM)
-        cx = torch.ones(NODE_NUM_DIM)
+        hx = torch.randn(NODE_NUM_DIM)
+        cx = torch.randn(NODE_NUM_DIM)
+        # hx = torch.ones(NODE_NUM_DIM)
+        # cx = torch.ones(NODE_NUM_DIM)
 
         for i in range(len(data.x)):
             hx, cx = self.lstm_cell(x[i], (hx, cx))
