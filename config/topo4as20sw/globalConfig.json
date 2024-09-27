@@ -1,0 +1,31 @@
+{
+    "cross_domain_links": [
+        ["sw5", "sw6"],
+        ["sw8", "sw14"],
+        ["sw9", "sw10"],
+        ["sw13", "sw17"],
+        ["sw19", "sw1"]
+    ],
+    "local_topo_listen_address": {
+        "ip": "localhost",
+        "port": 2101
+    },
+    "ASController_listen_addresses": {
+        "1": {
+            "ip": "localhost",
+            "port": 2111
+        },
+        "2": {
+            "ip": "localhost",
+            "port": 2211
+        },
+        "3": {
+            "ip": "localhost",
+            "port": 2311
+        },
+        "4": {
+            "ip": "localhost",
+            "port": 2411
+        }
+    }
+}

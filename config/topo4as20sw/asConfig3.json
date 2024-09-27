@@ -1,0 +1,52 @@
+{
+    "ASN": 3,
+    "router_name_set": [
+        "sw10",
+        "sw11",
+        "sw12",
+        "sw13",
+        "sw14"
+    ],
+    "router_distance_dict": {
+        "sw10": {
+            "sw11": 1,
+            "sw12": 2,
+            "sw13": 3,
+            "sw14": 4
+        },
+        "sw11": {
+            "sw10": 1,
+            "sw12": 1,
+            "sw13": 2,
+            "sw14": 3
+        },
+        "sw12": {
+            "sw10": 2,
+            "sw11": 1,
+            "sw13": 1,
+            "sw14": 2
+        },
+        "sw13": {
+            "sw10": 3,
+            "sw11": 2,
+            "sw12": 1,
+            "sw14": 1
+        },
+        "sw14": {
+            "sw10": 4,
+            "sw11": 3,
+            "sw12": 2,
+            "sw13": 1
+        }
+    },
+    "ip_router": {
+        "H5": "sw10",
+        "H4": "sw13"
+    },
+    "global_controller_address": {
+        "ip": "localhost",
+        "port": 2101
+    },
+    "global_controller_listen_port": 2311,
+    "input_listening_port": 2321
+}

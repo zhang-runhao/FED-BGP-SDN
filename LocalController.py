@@ -14,6 +14,8 @@ import socket
 import pickle
 import GraphNN
 import argparse
+import time
+import keyboard
 
 
 class LocalController:
@@ -56,7 +58,9 @@ if __name__ == '__main__':
     global_controller_addr = config['global_controller_address']
     global_controller_listen_port = config['global_controller_listen_port']
     input_listening_port = config['input_listening_port']
-    
+    # 时间字典（用于记录每个事件的时间）
+    time_dict = dict()
+    time_dict['inference_times'] = list()
     # 构建本地拓扑结构
     # 根据AS号初始化本地控制器
     local_controller = LocalController(ASN)
@@ -85,7 +89,11 @@ if __name__ == '__main__':
     local_controller.global_topology = GlobalTopology()
     
     # 本地拓扑变换
+    start = int(round(time.time() * 1000))
     local_controller.message_passing(3)
+    end = int(round(time.time() * 1000))
+    time_dict['local_topo_trans'] = end - start
+    print(f'Local topology transformed... Time: {end - start} ms')
     
     # 将变换后的本地拓扑上传联邦控制器
     global_controller_ip = global_controller_addr['ip']
@@ -123,30 +131,57 @@ if __name__ == '__main__':
     model = GraphNN.Net()
     model.eval()
     model.load_state_dict(torch.load('./model/4_Claranet_global_model_2.pth'))
+    subModel1 = GraphNN.subNet1()
+    subModel1.eval()
+    subModel1.conv1 = model.conv1
+    subModel1.conv2 = model.conv2
+    subModel1.lstm_cell = model.lstm_cell
+    
+    subModel2 = GraphNN.subNet2()
+    subModel2.eval()
+    subModel2.linear0 = model.linear0
+    subModel2.linear1 = model.linear1
+    subModel2.linear2 = model.linear2
+    subModel2.linear3 = model.linear3
+    
+    embedding = subModel1(local_controller.global_topology)
     
     # 监听BGP控制器发来的数据
     # input_listening_port = 2121
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         s.bind(('localhost', input_listening_port))
         s.listen()
+        count = 0
         while True:
             try:
                 conn, addr = s.accept()
                 with conn:
                     print(f'Connected by {addr}')
                     data = conn.recv(1024)
+                    print(f'data is {data!r}')
                     data = pickle.loads(data)
+                    print(f'pickled data is {data}')
                     src = local_controller.global_topology.router_id_str_to_int[data['Router_id']]
                     next_hop = local_controller.global_topology.router_id_str_to_int[data['next_hop']]
                     dst = local_controller.global_topology.router_id_str_to_int[local_controller.global_topology.ip_router[data['IP_prefix']]]
                     input_data = [src, next_hop, dst]
                     print(f'input_data: {input_data}')
-                    out = model(local_controller.global_topology, input_data)
+                    start = int(round(time.time() * 1000))
+                    out = subModel2(input_data, embedding)
+                    end = int(round(time.time() * 1000))
+                    time_dict['inference_times'].append(end - start)
                     out = out.item()
                     out = int(out)
-                    out = 100 - out                                                            
+                    out = 200 - out                                                            
                     print(f'Dataset received...')
                     print(f'out: {out}')
+                    print(f'Time: {end - start} ms')
                     conn.sendall(f'{out}'.encode())
+                    count += 1
+                    if count % 5 == 0:
+                        time_dict['average_inference_time'] = sum(time_dict['inference_times']) / len(time_dict['inference_times'])
+                        with open(f'./time_dict/{ASN}_time_dict.json', 'w') as f:
+                            json.dump(time_dict, f)
             except Exception as e:
                 print(f'Error: {e}')
+    print('KeyboardInterrupt')

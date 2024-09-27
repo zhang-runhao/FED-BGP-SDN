@@ -62,8 +62,11 @@ class Net(torch.nn.Module):
 
         x = torch.cat([x, original_edge_index_source, original_edge_index_target], dim=-1)
         # print(f'x.shape: {x.shape}')
-        hx = torch.randn(NODE_NUM_DIM)
-        cx = torch.randn(NODE_NUM_DIM)
+        # hx = torch.randn(NODE_NUM_DIM)
+        # cx = torch.randn(NODE_NUM_DIM)
+        hx = torch.ones(NODE_NUM_DIM)
+        cx = torch.ones(NODE_NUM_DIM)
+
         for i in range(len(data.x)):
             hx, cx = self.lstm_cell(x[i], (hx, cx))
         # print(f'hx.shape: {hx.shape}')
@@ -100,6 +103,88 @@ class Net(torch.nn.Module):
         original_edge_index_target = torch.stack(original_edge_index_target)
         return original_edge_index_source, original_edge_index_target
         
+class subNet1(torch.nn.Module):
+    def __init__(self):
+        super(subNet1, self).__init__()
+        self.conv1 = SAGEConv(NODE_FEATURE_EMBED_DIM, 16)
+        self.conv2 = SAGEConv(16, NODE_NUM_DIM)
+        self.lstm_cell = nn.LSTMCell(NODE_NUM_DIM * 3, NODE_NUM_DIM)
+    
+    def forward(self, global_topology):
+        data, edge_to_node_index, edge_to_node = global_topology.transpose_torch_geometric_data()
+        x, edge_index = data.x, data.edge_index
+        # print(f'x.shape: {x.shape}')
+        x = x.unsqueeze(1)
+        # print(f'x.shape: {x.shape}')
+        x = F.relu(self.conv1(x, edge_index))
+        # print(f'x.shape: {x.shape}')
+        # x_g1 = gap(x, torch.zeros(1, dtype=torch.long))
+        # print(f'x_g1.shape: {x_g1.shape}')
+        x = F.relu(self.conv2(x, edge_index))
+        # print(f'x.shape: {x.shape}')
+        x_g = gap(x, torch.zeros(1, dtype=torch.long))
+        x_g = x_g.squeeze(0)
+        # print(f'x_g.shape: {x_g.shape}')
+        original_edge_index_source, original_edge_index_target = self.one_hot_encode(data, edge_to_node_index, edge_to_node)
+        # print(f'original_edge_index_source.shape: {original_edge_index_source.shape}')
+        # print(f'original_edge_index_target.shape: {original_edge_index_target.shape}')
+
+        x = torch.cat([x, original_edge_index_source, original_edge_index_target], dim=-1)
+        # print(f'x.shape: {x.shape}')
+        # hx = torch.randn(NODE_NUM_DIM)
+        # cx = torch.randn(NODE_NUM_DIM)
+        hx = torch.ones(NODE_NUM_DIM)
+        cx = torch.ones(NODE_NUM_DIM)
+
+        for i in range(len(data.x)):
+            hx, cx = self.lstm_cell(x[i], (hx, cx))
+        # print(f'hx.shape: {hx.shape}')
+        # print(f'cx.shape: {cx.shape}')
+
+        x = torch.cat([cx, hx, x_g], dim=-1)
+        return x
+    
+    # 对边的源节点和目标节点进行one-hot编码，返回源节点和目标节点的one-hot编码组
+    def one_hot_encode(self, data, edge_to_node_index, edge_to_node):
+        original_edge_index_source = []
+        original_edge_index_target = []
+        for i in range(len(data.x)):
+            original_edge_index_source.append(edge_to_node[edge_to_node_index[i]][0])
+            original_edge_index_target.append(edge_to_node[edge_to_node_index[i]][1])
+        for index, value in enumerate(original_edge_index_source):
+            original_edge_index_source[index] = torch.eye(NODE_NUM_DIM)[value]
+        for index, value in enumerate(original_edge_index_target):
+            original_edge_index_target[index] = torch.eye(NODE_NUM_DIM)[value]
+        original_edge_index_source = torch.stack(original_edge_index_source)
+        original_edge_index_target = torch.stack(original_edge_index_target)
+        return original_edge_index_source, original_edge_index_target
+
+class subNet2(torch.nn.Module):
+    def __init__(self):
+        super(subNet2, self).__init__()
+        self.linear0 = nn.Linear(6 * NODE_NUM_DIM, 32)
+        self.linear1 = nn.Linear(32, 16)
+        self.linear2 = nn.Linear(16, 8)
+        self.linear3 = nn.Linear(8, 1)
+
+    def forward(self, routing_table_item, embedding):
+        src = torch.eye(NODE_NUM_DIM)[routing_table_item[0]]
+        path = torch.eye(NODE_NUM_DIM)[routing_table_item[1]]
+        dst = torch.eye(NODE_NUM_DIM)[routing_table_item[2]]
+        
+        x = torch.cat([embedding, src, path, dst], dim=-1)
+        # print(f'x.shape: {x.shape}')
+        x = F.relu(self.linear0(x))
+        # print(f'x.shape: {x.shape}')
+        x = F.relu(self.linear1(x))
+        # print(f'x.shape: {x.shape}')
+        x = F.relu(self.linear2(x))
+        # print(f'x.shape: {x.shape}')
+        x = F.relu(self.linear3(x))
+        # print(f'x.shape: {x.shape}')
+        # print(f'x: {x}')
+        return x
+
 
 
 if __name__ == '__main__':

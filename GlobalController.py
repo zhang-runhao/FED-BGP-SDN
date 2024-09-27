@@ -5,6 +5,7 @@ import socket
 import pickle
 import argparse
 import json
+import time
 
 class GlobalController:
     '''
@@ -59,6 +60,8 @@ if __name__ == '__main__':
     local_topo_listen_addr = config['local_topo_listen_address']
     ASes = [int(key) for key in config['ASController_listen_addresses']]
     ASController_listen_addresses = config['ASController_listen_addresses']
+    # 时间字典（用于记录每个事件的时间）
+    time_dict = dict()
     
     # 构建全局拓扑基本信息
     global_controller = GlobalController()
@@ -97,8 +100,11 @@ if __name__ == '__main__':
     # global_controller.ASController_ip[2] = ['localhost', 2211]
 
     # 生成全局拓扑
+    start = int(round(time.time() * 1000))
     global_controller.global_topology.generate_global_topology()
-    print(f'Global topology generated...   done!')
+    end = int(round(time.time() * 1000))
+    time_dict['global_topo_gen'] = end - start
+    print(f'Global topology generated...   done! Time: {time_dict["global_topo_gen"]} ms')
     
     # 分发全局拓扑信息
     for key, value in global_controller.ASController_ip.items():
@@ -118,3 +124,5 @@ if __name__ == '__main__':
                 except Exception as e:
                     print(f'Error: {e}')
                     continue
+    with open('./time_dict/global_time_dict.json', 'w') as f:
+        json.dump(time_dict, f)
