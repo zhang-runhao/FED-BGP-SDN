@@ -1,0 +1,80 @@
+{
+    "ASN": 5,
+    "router_name_set": [
+        "sw26",
+        "sw27",
+        "sw28",
+        "sw29",
+        "sw30",
+        "sw31",
+        "sw32"
+    ],
+    "router_distance_dict": {
+        "sw26": {
+            "sw27": 1,
+            "sw28": 1,
+            "sw29": 2,
+            "sw30": 2,
+            "sw31": 2,
+            "sw32": 1
+        },
+        "sw27": {
+            "sw26": 1,
+            "sw28": 1,
+            "sw29": 2,
+            "sw30": 3,
+            "sw31": 3,
+            "sw32": 2
+        },
+        "sw28": {
+            "sw26": 1,
+            "sw27": 1,
+            "sw29": 1,
+            "sw30": 2,
+            "sw31": 2,
+            "sw32": 2
+        },
+        "sw29": {
+            "sw26": 2,
+            "sw27": 2,
+            "sw28": 1,
+            "sw30": 1,
+            "sw31": 1,
+            "sw32": 2
+        },
+        "sw30": {
+            "sw26": 2,
+            "sw27": 3,
+            "sw28": 2,
+            "sw29": 1,
+            "sw31": 2,
+            "sw32": 1
+        },
+        "sw31": {
+            "sw26": 2,
+            "sw27": 3,
+            "sw28": 2,
+            "sw29": 1,
+            "sw30": 2,
+            "sw32": 1
+        },
+        "sw32": {
+            "sw26": 1,
+            "sw27": 2,
+            "sw28": 2,
+            "sw29": 2,
+            "sw30": 1,
+            "sw31": 1
+        }
+    },
+    "ip_router": {
+        "H7": "sw29",
+        "H8": "sw30"
+    },
+    "global_controller_address": {
+        "ip": "localhost",
+        "port": 2101
+    },
+    "global_controller_listen_port": 2511,
+    "input_listening_port": 2521
+}

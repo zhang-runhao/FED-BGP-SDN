@@ -33,7 +33,7 @@ class GlobalController:
                     conn, addr = s.accept()
                     with conn:
                         print(f'Connected by {addr}')
-                        data = conn.recv(1024)
+                        data = conn.recv(2048)
                         received_data = AStopology()
                         received_data = pickle.loads(data)
                         self.global_topology.list_of_ASes[received_data.ASN] = received_data

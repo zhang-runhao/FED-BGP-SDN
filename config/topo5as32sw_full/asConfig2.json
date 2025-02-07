@@ -1,0 +1,69 @@
+{
+    "ASN": 2,
+    "router_name_set": [
+        "sw7",
+        "sw8",
+        "sw9",
+        "sw10",
+        "sw11",
+        "sw12"
+    ],
+    "router_distance_dict": {
+        "sw7": {
+            "sw8": 1,
+            "sw9": 2,
+            "sw10": 3,
+            "sw11": 3,
+            "sw12": 2
+        },
+        "sw8": {
+            "sw7": 1,
+            "sw9": 1,
+            "sw10": 2,
+            "sw11": 2,
+            "sw12": 2
+        },
+        "sw9": {
+            "sw7": 2,
+            "sw8": 1,
+            "sw10": 1,
+            "sw11": 1,
+            "sw12": 1
+        },
+        "sw10": {
+            "sw7": 3,
+            "sw8": 2,
+            "sw9": 1,
+            "sw11": 1,
+            "sw12": 2
+        },
+        "sw11": {
+            "sw7": 3,
+            "sw8": 2,
+            "sw9": 1,
+            "sw10": 1,
+            "sw12": 2
+        },
+        "sw12": {
+            "sw7": 1,
+            "sw8": 2,
+            "sw9": 1,
+            "sw10": 2,
+            "sw11": 2
+        }
+    },
+    "ip_router": {
+        "H7": "sw7",
+        "H8": "sw8",
+        "H9": "sw9",
+        "H10": "sw10",
+        "H11": "sw11",
+        "H12": "sw12"
+    },
+    "global_controller_address": {
+        "ip": "localhost",
+        "port": 2101
+    },
+    "global_controller_listen_port": 2211,
+    "input_listening_port": 2221
+}
