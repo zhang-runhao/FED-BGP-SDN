@@ -43,6 +43,33 @@ class LocalController:
     '''
     def download_global_topology(global_topology):
         self.global_topology = global_topology
+        
+    def print_local_topology_edge_links(self, router_distance_dict):
+        # get edge nodes in str (same to config file)
+        print('Local topology edge links:')
+        edge_nodes = self.global_topology.get_edge_nodes()
+        for node in router_distance_dict.keys():
+            if node in edge_nodes:
+                for neighbor in router_distance_dict[node].keys():
+                    if neighbor in edge_nodes:
+                        print(f'{node} -> {neighbor} : {router_distance_dict[node][neighbor]}')
+        print('-----------------------------------')
+            
+    def print_global_topology_edge_links(self):
+        edge_nodes = self.global_topology.get_edge_nodes()
+        for AS in self.global_topology.list_of_ASes.values():
+            print(f'AS {AS.ASN}')
+            for node in AS.list_of_all_Nodes.values():
+                router_name = self.global_topology.router_id_int_to_str[node.RouterID]
+                if router_name in edge_nodes:
+                    # print(f'Node {router_name}')
+                    for neighbor in node.neighbors.keys():
+                        if neighbor in AS.router_id_int_to_str.keys():
+                            neighbor_name = AS.router_id_int_to_str[neighbor]
+                            # print(f'neighbor: {neighbor_name}')
+                            if neighbor_name in edge_nodes:
+                                print(f'{router_name} -> {neighbor_name} : {node.neighbors[neighbor][1]}')
+            print('-----------------------------------')
 
 if __name__ == '__main__':
     
@@ -129,6 +156,10 @@ if __name__ == '__main__':
         except Exception as e:
             print(f'Error: {e}')
             
+    # 打印本地拓扑的边链路
+    local_controller.print_local_topology_edge_links(router_distance_dict)
+    # 打印全局拓扑的边链路
+    local_controller.print_global_topology_edge_links()
     # 加载模型
     model = GraphNN.Net()
     model.eval()

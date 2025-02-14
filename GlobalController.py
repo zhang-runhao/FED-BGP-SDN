@@ -90,6 +90,7 @@ if __name__ == '__main__':
             local_topology.list_of_all_Nodes[value].RouterID = router_count
             global_controller.global_topology.router_id_str_to_int[key] = router_count
             global_controller.global_topology.router_id_int_to_str[router_count] = key
+            print(f'new_id : {local_topology.list_of_all_Nodes[value].RouterID}, name : {global_controller.global_topology.router_id_int_to_str[router_count]}')
             
             router_count += 1
             

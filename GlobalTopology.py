@@ -36,3 +36,11 @@ class GlobalTopology(Topology) :
         for link in self.cross_domain_links:
             self.list_of_all_Nodes[self.router_id_str_to_int[link[0]]].add_neighbor(self.list_of_all_Nodes[self.router_id_str_to_int[link[1]]], 1)
         
+    def get_edge_nodes(self):
+        edge_nodes_str = []
+        for link in self.cross_domain_links:
+            if link[0] not in edge_nodes_str:
+                edge_nodes_str.append(link[0])
+            if link[1] not in edge_nodes_str:
+                edge_nodes_str.append(link[1])
+        return edge_nodes_str
