@@ -35,31 +35,31 @@ class Net(torch.nn.Module):
     def __init__(self):
         super(Net, self).__init__()
         #定义GINConv层
-        self.conv1 =GINConv(torch.nn.Sequential(
-            torch.nn.Linear(NODE_FEATURE_EMBED_DIM, 32),
-            torch.nn.BatchNorm1d(32),
-            torch.nn.ReLU(),
-            torch.nn.Linear(32, 32),
-            torch.nn.BatchNorm1d(32),
-            torch.nn.ReLU(),
-            torch.nn.Linear(32, 32),
-            torch.nn.BatchNorm1d(32),
-            torch.nn.ReLU(),
-        ),train_eps=True)
-        self.conv2 = GINConv(torch.nn.Sequential(
-            torch.nn.Linear(32, 32),
-            torch.nn.BatchNorm1d(32),
-            torch.nn.ReLU(),
-            torch.nn.Linear(32, 32),
-            torch.nn.BatchNorm1d(32),
-            torch.nn.ReLU(),
-            torch.nn.Linear(32, NODE_NUM_DIM),
-            torch.nn.BatchNorm1d(NODE_NUM_DIM),
-            torch.nn.ReLU(),
-        ),train_eps=True)
-        # self.conv1 = GCNConv(NODE_FEATURE_EMBED_DIM, 32)
-        # self.conv2 = GCNConv(32, 32)
-        # self.conv3 = GCNConv(32, NODE_NUM_DIM)
+        # self.conv1 =GINConv(torch.nn.Sequential(
+        #     torch.nn.Linear(NODE_FEATURE_EMBED_DIM, 32),
+        #     torch.nn.BatchNorm1d(32),
+        #     torch.nn.ReLU(),
+        #     torch.nn.Linear(32, 32),
+        #     torch.nn.BatchNorm1d(32),
+        #     torch.nn.ReLU(),
+        #     torch.nn.Linear(32, 32),
+        #     torch.nn.BatchNorm1d(32),
+        #     torch.nn.ReLU(),
+        # ),train_eps=True)
+        # self.conv2 = GINConv(torch.nn.Sequential(
+        #     torch.nn.Linear(32, 32),
+        #     torch.nn.BatchNorm1d(32),
+        #     torch.nn.ReLU(),
+        #     torch.nn.Linear(32, 32),
+        #     torch.nn.BatchNorm1d(32),
+        #     torch.nn.ReLU(),
+        #     torch.nn.Linear(32, NODE_NUM_DIM),
+        #     torch.nn.BatchNorm1d(NODE_NUM_DIM),
+        #     torch.nn.ReLU(),
+        # ),train_eps=True)
+        self.conv1 = GCNConv(NODE_FEATURE_EMBED_DIM, 32)
+        self.conv2 = GCNConv(32, 32)
+        self.conv3 = GCNConv(32, NODE_NUM_DIM)
         # self.conv1 = SAGEConv(NODE_FEATURE_EMBED_DIM, 16)
         # self.conv2 = SAGEConv(16, NODE_NUM_DIM)
         self.lstm_cell = nn.LSTMCell(NODE_NUM_DIM * 3, NODE_NUM_DIM)
@@ -80,7 +80,7 @@ class Net(torch.nn.Module):
         # x_g1 = gap(x, torch.zeros(1, dtype=torch.long))
         # print(f'x_g1.shape: {x_g1.shape}')
         x = F.relu(self.conv2(x, edge_index))
-        # x = F.relu(self.conv3(x, edge_index))
+        x = F.relu(self.conv3(x, edge_index))
         # print(f'x.shape: {x.shape}')
         x_g = gap(x, torch.zeros(1, dtype=torch.long))
         x_g = x_g.squeeze(0)
@@ -136,31 +136,31 @@ class subNet1(torch.nn.Module):
     def __init__(self):
         super(subNet1, self).__init__()
         #定义GINConv层
-        self.conv1 =GINConv(torch.nn.Sequential(
-            torch.nn.Linear(NODE_FEATURE_EMBED_DIM, 64),
-            torch.nn.BatchNorm1d(64),
-            torch.nn.ReLU(),
-            torch.nn.Linear(64, 64),
-            torch.nn.BatchNorm1d(64),
-            torch.nn.ReLU(),
-            torch.nn.Linear(64, 64),
-            torch.nn.BatchNorm1d(64),
-            torch.nn.ReLU(),
-        ),train_eps=True)
-        self.conv2 = GINConv(torch.nn.Sequential(
-            torch.nn.Linear(64, 64),
-            torch.nn.BatchNorm1d(64),
-            torch.nn.ReLU(),
-            torch.nn.Linear(64, 64),
-            torch.nn.BatchNorm1d(64),
-            torch.nn.ReLU(),
-            torch.nn.Linear(64, NODE_NUM_DIM),
-            torch.nn.BatchNorm1d(NODE_NUM_DIM),
-            torch.nn.ReLU(),
-        ),train_eps=True)
-        # self.conv1 = GCNConv(NODE_FEATURE_EMBED_DIM, 32)
-        # self.conv2 = GCNConv(32, 32)
-        # self.conv3 = GCNConv(32, NODE_NUM_DIM)
+        # self.conv1 =GINConv(torch.nn.Sequential(
+        #     torch.nn.Linear(NODE_FEATURE_EMBED_DIM, 64),
+        #     torch.nn.BatchNorm1d(64),
+        #     torch.nn.ReLU(),
+        #     torch.nn.Linear(64, 64),
+        #     torch.nn.BatchNorm1d(64),
+        #     torch.nn.ReLU(),
+        #     torch.nn.Linear(64, 64),
+        #     torch.nn.BatchNorm1d(64),
+        #     torch.nn.ReLU(),
+        # ),train_eps=True)
+        # self.conv2 = GINConv(torch.nn.Sequential(
+        #     torch.nn.Linear(64, 64),
+        #     torch.nn.BatchNorm1d(64),
+        #     torch.nn.ReLU(),
+        #     torch.nn.Linear(64, 64),
+        #     torch.nn.BatchNorm1d(64),
+        #     torch.nn.ReLU(),
+        #     torch.nn.Linear(64, NODE_NUM_DIM),
+        #     torch.nn.BatchNorm1d(NODE_NUM_DIM),
+        #     torch.nn.ReLU(),
+        # ),train_eps=True)
+        self.conv1 = GCNConv(NODE_FEATURE_EMBED_DIM, 32)
+        self.conv2 = GCNConv(32, 32)
+        self.conv3 = GCNConv(32, NODE_NUM_DIM)
         # self.conv1 = SAGEConv(NODE_FEATURE_EMBED_DIM, 16)
         # self.conv2 = SAGEConv(16, NODE_NUM_DIM)
         self.lstm_cell = nn.LSTMCell(NODE_NUM_DIM * 3, NODE_NUM_DIM)
@@ -176,7 +176,7 @@ class subNet1(torch.nn.Module):
         # x_g1 = gap(x, torch.zeros(1, dtype=torch.long))
         # print(f'x_g1.shape: {x_g1.shape}')
         x = F.relu(self.conv2(x, edge_index))
-        # x = F.relu(self.conv3(x, edge_index))
+        x = F.relu(self.conv3(x, edge_index))
         # print(f'x.shape: {x.shape}')
         x_g = gap(x, torch.zeros(1, dtype=torch.long))
         x_g = x_g.squeeze(0)

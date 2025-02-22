@@ -1,0 +1,50 @@
+{
+    "cross_domain_links": [
+        [
+            "3",
+            "32"
+        ],
+        [
+            "6",
+            "8"
+        ],
+        [
+            "11",
+            "14"
+        ],
+        [
+            "20",
+            "22"
+        ],
+        [
+            "25",
+            "26"
+        ]
+    ],
+    "local_topo_listen_address": {
+        "ip": "localhost",
+        "port": 60001
+    },
+    "ASController_listen_addresses": {
+        "1": {
+            "ip": "localhost",
+            "port": 6001
+        },
+        "2": {
+            "ip": "localhost",
+            "port": 6002
+        },
+        "3": {
+            "ip": "localhost",
+            "port": 6003
+        },
+        "4": {
+            "ip": "localhost",
+            "port": 6004
+        },
+        "5": {
+            "ip": "localhost",
+            "port": 6005
+        }
+    }
+}

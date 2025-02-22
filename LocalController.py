@@ -163,7 +163,7 @@ if __name__ == '__main__':
     # 加载模型
     model = GraphNN.Net()
     model.eval()
-    model.load_state_dict(torch.load('./model/4_Compuserve_new1015_GIN_global_model_4_random_messagepassing3_data1-5_10_new.pth'))
+    model.load_state_dict(torch.load('./model/1_Compuserve_new1015_GCN_global_model_0_random_messagepassing3_data1-5_10.pth'))
     subModel1 = GraphNN.subNet1()
     subModel1.eval()
     subModel1.conv1 = model.conv1
