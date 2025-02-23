@@ -16,6 +16,7 @@ import GraphNN
 import argparse
 import time
 import keyboard
+import math
 
 
 class LocalController:
@@ -201,14 +202,16 @@ if __name__ == '__main__':
                     input_data = [src, next_hop, dst]
                     # print(f'input_data: {input_data}')
                     start = int(round(time.time() * 1000))
-                    print(f'start time: {start}')
                     out = subModel2(input_data, embedding)
                     end = int(round(time.time() * 1000))
                     # time_dict['inference_times'].append(end - start)
                     out = out.item()
                     out = int(out)
-                    out = 300 - out                                                            
+                    out = 300 - out
+                    if out < 0:
+                        out = 0                                          
                     # print(f'Data received...')
+                    print(f'start time: {start}')
                     print(f'local preference: {out}')
                     print(f'end time: {end}')
                     print(f'Time: {end - start} ms')
