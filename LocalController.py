@@ -80,6 +80,7 @@ if __name__ == '__main__':
     config_file = args.config
     config = json.load(open(config_file, 'r'))
     ASN = int(config['ASN'])
+    torch.manual_seed(ASN*100)
     print(f"This is Local Controller {ASN}")
     router_name_set = config['router_name_set']
     router_distance_dict = config['router_distance_dict']
@@ -164,7 +165,7 @@ if __name__ == '__main__':
     # 加载模型
     model = GraphNN.Net()
     model.eval()
-    model.load_state_dict(torch.load('./model/1_Compuserve_new1015_GCN_global_model_0_random_messagepassing3_data1-5_10.pth'))
+    model.load_state_dict(torch.load('./model/2_Compuserve_new1015_GCN_global_model_3_random_messagepassing3_data1-5_10.pth'))
     subModel1 = GraphNN.subNet1()
     subModel1.eval()
     subModel1.conv1 = model.conv1
@@ -179,7 +180,6 @@ if __name__ == '__main__':
     subModel2.linear3 = model.linear3
     
     embedding = subModel1(local_controller.global_topology)
-    
     # 监听BGP控制器发来的数据
     # input_listening_port = 2121
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:

@@ -23,6 +23,7 @@ class GlobalController:
         # self.ip_router = TopoFromFile.ip_router
     
     def listen_local_topology(self, host, port):
+        list_of_ASes = dict()
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             s.bind((host, port))
             s.listen()
@@ -36,13 +37,14 @@ class GlobalController:
                         data = conn.recv(2048)
                         received_data = AStopology()
                         received_data = pickle.loads(data)
-                        self.global_topology.list_of_ASes[received_data.ASN] = received_data
+                        list_of_ASes[received_data.ASN] = received_data
                         print(f'Local topology of AS {received_data.ASN} received...')
                         count += 1
                         conn.sendall(f'Local topology of AS {received_data.ASN} received...'.encode())
                 except Exception as e:
                     print(f'Error: {e}')
                     break
+        return list_of_ASes
     
 
 
@@ -78,11 +80,14 @@ if __name__ == '__main__':
     # global_controller.global_topology.cross_domain_links.append(['1.3', '2.3'])
     
     # 等待各个本地控制器上传本地拓扑信息
-    global_controller.listen_local_topology(local_topo_listen_addr['ip'], local_topo_listen_addr['port'])
+    list_of_ASes_topo = global_controller.listen_local_topology(local_topo_listen_addr['ip'], local_topo_listen_addr['port'])
     # global_controller.listen_local_topology('localhost', 2101)
     
     # 重构字符串id到整数id的映射
     router_count = 0
+    list_of_ASes = [1, 2, 3, 4, 5]
+    for AS in list_of_ASes:
+        global_controller.global_topology.list_of_ASes[AS] = list_of_ASes_topo[AS]
     for local_topology in global_controller.global_topology.list_of_ASes.values():
         print(f'local_topology.router_id_str_to_int: {local_topology.router_id_str_to_int}')
         for key, value in local_topology.router_id_str_to_int.items():
