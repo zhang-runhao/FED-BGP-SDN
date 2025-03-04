@@ -165,7 +165,7 @@ if __name__ == '__main__':
     # 加载模型
     model = GraphNN.Net()
     model.eval()
-    model.load_state_dict(torch.load('./model/2_Compuserve_new1015_GCN_global_model_3_random_messagepassing3_data1-5_10.pth'))
+    model.load_state_dict(torch.load('./model/global_model_9.pth'))
     subModel1 = GraphNN.subNet1()
     subModel1.eval()
     subModel1.conv1 = model.conv1
@@ -216,6 +216,14 @@ if __name__ == '__main__':
                     print(f'end time: {end}')
                     print(f'Time: {end - start} ms')
                     print(f'--------------------------------------------------')
+                    # 输出日志到文件
+                    with open(f'./logs/{ASN}_local_controller.log', 'a') as f:
+                        f.write(f'received prefix: {data["IP_prefix"]}\n')
+                        f.write(f'start time: {start}\n')
+                        f.write(f'local preference: {out}\n')
+                        f.write(f'end time: {end}\n')
+                        f.write(f'Time: {end - start} ms\n')
+                        f.write(f'--------------------------------------------------\n')
                     conn.sendall(f'{out}'.encode())
                     # count += 1
                     # if count % 5 == 0:

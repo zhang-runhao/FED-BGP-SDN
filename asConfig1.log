@@ -1,0 +1,886 @@
+This is Local Controller 1
+Local topology transformed.
+Received: Local topology of AS 1 received...
+Connected by ('127.0.0.1', 61421)
+Global topology received...
+Local topology edge links:
+3 -> 6 : 2
+6 -> 3 : 2
+-----------------------------------
+AS 1
+3 -> 6 : 2.480788469314575
+6 -> 3 : 2.480788469314575
+-----------------------------------
+AS 2
+8 -> 11 : 2.5520405769348145
+11 -> 8 : 2.5520405769348145
+-----------------------------------
+AS 3
+14 -> 20 : 5.93386173248291
+20 -> 14 : 5.93386173248291
+-----------------------------------
+AS 4
+22 -> 25 : 2.4728338718414307
+25 -> 22 : 2.4728338718414307
+-----------------------------------
+AS 5
+26 -> 32 : 1.5136313438415527
+32 -> 26 : 1.5136313438415527
+-----------------------------------
+received prefix: 10.0.0.1
+start time: 1741010761082
+local preference: 289
+end time: 1741010761083
+Time: 1 ms
+--------------------------------------------------
+received prefix: 10.0.0.1
+start time: 1741010761096
+local preference: 289
+end time: 1741010761099
+Time: 3 ms
+--------------------------------------------------
+received prefix: 10.0.0.1
+start time: 1741010761102
+local preference: 289
+end time: 1741010761102
+Time: 0 ms
+--------------------------------------------------
+received prefix: 10.0.0.1
+start time: 1741010761104
+local preference: 289
+end time: 1741010761104
+Time: 0 ms
+--------------------------------------------------
+received prefix: 10.0.0.1
+start time: 1741010761105
+local preference: 289
+end time: 1741010761105
+Time: 0 ms
+--------------------------------------------------
+received prefix: 10.0.0.2
+start time: 1741010761107
+local preference: 289
+end time: 1741010761107
+Time: 0 ms
+--------------------------------------------------
+received prefix: 10.0.0.2
+start time: 1741010761109
+local preference: 289
+end time: 1741010761109
+Time: 0 ms
+--------------------------------------------------
+received prefix: 10.0.0.2
+start time: 1741010761110
+local preference: 289
+end time: 1741010761111
+Time: 1 ms
+--------------------------------------------------
+received prefix: 10.0.0.2
+start time: 1741010761115
+local preference: 289
+end time: 1741010761115
+Time: 0 ms
+--------------------------------------------------
+received prefix: 10.0.0.2
+start time: 1741010761117
+local preference: 289
+end time: 1741010761117
+Time: 0 ms
+--------------------------------------------------
+received prefix: 10.0.0.3
+start time: 1741010761151
+local preference: 289
+end time: 1741010761151
+Time: 0 ms
+--------------------------------------------------
+received prefix: 10.0.0.3
+start time: 1741010761153
+local preference: 289
+end time: 1741010761154
+Time: 1 ms
+--------------------------------------------------
+received prefix: 10.0.0.3
+start time: 1741010761155
+local preference: 289
+end time: 1741010761156
+Time: 1 ms
+--------------------------------------------------
+received prefix: 10.0.0.3
+start time: 1741010761157
+local preference: 289
+end time: 1741010761158
+Time: 1 ms
+--------------------------------------------------
+received prefix: 10.0.0.3
+start time: 1741010761182
+local preference: 289
+end time: 1741010761183
+Time: 1 ms
+--------------------------------------------------
+received prefix: 10.0.0.4
+start time: 1741010761552
+local preference: 288
+end time: 1741010761555
+Time: 3 ms
+--------------------------------------------------
+received prefix: 10.0.0.4
+start time: 1741010761610
+local preference: 288
+end time: 1741010761611
+Time: 1 ms
+--------------------------------------------------
+received prefix: 10.0.0.4
+start time: 1741010761615
+local preference: 288
+end time: 1741010761618
+Time: 3 ms
+--------------------------------------------------
+received prefix: 10.0.0.4
+start time: 1741010761626
+local preference: 288
+end time: 1741010761628
+Time: 2 ms
+--------------------------------------------------
+received prefix: 10.0.0.4
+start time: 1741010761647
+local preference: 288
+end time: 1741010761648
+Time: 1 ms
+--------------------------------------------------
+received prefix: 10.0.0.5
+start time: 1741010761780
+local preference: 289
+end time: 1741010761781
+Time: 1 ms
+--------------------------------------------------
+received prefix: 10.0.0.5
+start time: 1741010761795
+local preference: 289
+end time: 1741010761796
+Time: 1 ms
+--------------------------------------------------
+received prefix: 10.0.0.5
+start time: 1741010761815
+local preference: 289
+end time: 1741010761816
+Time: 1 ms
+--------------------------------------------------
+received prefix: 10.0.0.5
+start time: 1741010761822
+local preference: 289
+end time: 1741010761825
+Time: 3 ms
+--------------------------------------------------
+received prefix: 10.0.0.5
+start time: 1741010761851
+local preference: 289
+end time: 1741010761852
+Time: 1 ms
+--------------------------------------------------
+received prefix: 10.0.0.6
+start time: 1741010761890
+local preference: 289
+end time: 1741010761891
+Time: 1 ms
+--------------------------------------------------
+received prefix: 10.0.0.6
+start time: 1741010761901
+local preference: 289
+end time: 1741010761902
+Time: 1 ms
+--------------------------------------------------
+received prefix: 10.0.0.6
+start time: 1741010761934
+local preference: 289
+end time: 1741010761936
+Time: 2 ms
+--------------------------------------------------
+received prefix: 10.0.0.6
+start time: 1741010761945
+local preference: 289
+end time: 1741010761946
+Time: 1 ms
+--------------------------------------------------
+received prefix: 10.0.0.6
+start time: 1741010761960
+local preference: 289
+end time: 1741010761962
+Time: 2 ms
+--------------------------------------------------
+received prefix: 10.0.0.8
+start time: 1741010763817
+local preference: 289
+end time: 1741010763818
+Time: 1 ms
+--------------------------------------------------
+received prefix: 10.0.0.7
+start time: 1741010766550
+local preference: 289
+end time: 1741010766551
+Time: 1 ms
+--------------------------------------------------
+received prefix: 10.0.0.32
+start time: 1741010815253
+local preference: 289
+end time: 1741010815253
+Time: 0 ms
+--------------------------------------------------
+received prefix: 10.0.0.26
+start time: 1741010815630
+local preference: 289
+end time: 1741010815631
+Time: 1 ms
+--------------------------------------------------
+received prefix: 10.0.0.25
+start time: 1741010815698
+local preference: 289
+end time: 1741010815700
+Time: 2 ms
+--------------------------------------------------
+received prefix: 10.0.0.21
+start time: 1741010815790
+local preference: 289
+end time: 1741010815790
+Time: 0 ms
+--------------------------------------------------
+received prefix: 10.0.0.22
+start time: 1741010815852
+local preference: 289
+end time: 1741010815853
+Time: 1 ms
+--------------------------------------------------
+received prefix: 10.0.0.20
+start time: 1741010815930
+local preference: 289
+end time: 1741010815931
+Time: 1 ms
+--------------------------------------------------
+received prefix: 10.0.0.13
+start time: 1741010816052
+local preference: 290
+end time: 1741010816053
+Time: 1 ms
+--------------------------------------------------
+received prefix: 10.0.0.14
+start time: 1741010816162
+local preference: 289
+end time: 1741010816164
+Time: 2 ms
+--------------------------------------------------
+received prefix: 10.0.0.11
+start time: 1741010816250
+local preference: 290
+end time: 1741010816251
+Time: 1 ms
+--------------------------------------------------
+received prefix: 10.0.0.7
+start time: 1741010816381
+local preference: 289
+end time: 1741010816382
+Time: 1 ms
+--------------------------------------------------
+received prefix: 10.0.0.8
+start time: 1741010816506
+local preference: 289
+end time: 1741010816507
+Time: 1 ms
+--------------------------------------------------
+received prefix: 10.0.0.9
+start time: 1741010816879
+local preference: 289
+end time: 1741010816880
+Time: 1 ms
+--------------------------------------------------
+received prefix: 10.0.0.10
+start time: 1741010817019
+local preference: 289
+end time: 1741010817020
+Time: 1 ms
+--------------------------------------------------
+received prefix: 10.0.0.15
+start time: 1741010817134
+local preference: 289
+end time: 1741010817135
+Time: 1 ms
+--------------------------------------------------
+received prefix: 10.0.0.16
+start time: 1741010817258
+local preference: 289
+end time: 1741010817260
+Time: 2 ms
+--------------------------------------------------
+received prefix: 10.0.0.17
+start time: 1741010817398
+local preference: 289
+end time: 1741010817399
+Time: 1 ms
+--------------------------------------------------
+received prefix: 10.0.0.18
+start time: 1741010817524
+local preference: 289
+end time: 1741010817524
+Time: 0 ms
+--------------------------------------------------
+received prefix: 10.0.0.19
+start time: 1741010817663
+local preference: 289
+end time: 1741010817664
+Time: 1 ms
+--------------------------------------------------
+received prefix: 10.0.0.23
+start time: 1741010817763
+local preference: 289
+end time: 1741010817765
+Time: 2 ms
+--------------------------------------------------
+received prefix: 10.0.0.24
+start time: 1741010817842
+local preference: 289
+end time: 1741010817842
+Time: 0 ms
+--------------------------------------------------
+received prefix: 10.0.0.27
+start time: 1741010817937
+local preference: 289
+end time: 1741010817938
+Time: 1 ms
+--------------------------------------------------
+received prefix: 10.0.0.28
+start time: 1741010818076
+local preference: 289
+end time: 1741010818077
+Time: 1 ms
+--------------------------------------------------
+received prefix: 10.0.0.29
+start time: 1741010818185
+local preference: 289
+end time: 1741010818187
+Time: 2 ms
+--------------------------------------------------
+received prefix: 10.0.0.30
+start time: 1741010818256
+local preference: 289
+end time: 1741010818257
+Time: 1 ms
+--------------------------------------------------
+received prefix: 10.0.0.31
+start time: 1741010818359
+local preference: 289
+end time: 1741010818360
+Time: 1 ms
+--------------------------------------------------
+received prefix: 10.0.0.32
+start time: 1741010821846
+local preference: 289
+end time: 1741010821846
+Time: 0 ms
+--------------------------------------------------
+received prefix: 10.0.0.32
+start time: 1741010821855
+local preference: 289
+end time: 1741010821855
+Time: 0 ms
+--------------------------------------------------
+received prefix: 10.0.0.32
+start time: 1741010821859
+local preference: 289
+end time: 1741010821861
+Time: 2 ms
+--------------------------------------------------
+received prefix: 10.0.0.32
+start time: 1741010821888
+local preference: 289
+end time: 1741010821889
+Time: 1 ms
+--------------------------------------------------
+received prefix: 10.0.0.32
+start time: 1741010821901
+local preference: 289
+end time: 1741010821902
+Time: 1 ms
+--------------------------------------------------
+received prefix: 10.0.0.26
+start time: 1741010821986
+local preference: 289
+end time: 1741010821986
+Time: 0 ms
+--------------------------------------------------
+received prefix: 10.0.0.26
+start time: 1741010821996
+local preference: 289
+end time: 1741010821997
+Time: 1 ms
+--------------------------------------------------
+received prefix: 10.0.0.26
+start time: 1741010822006
+local preference: 289
+end time: 1741010822006
+Time: 0 ms
+--------------------------------------------------
+received prefix: 10.0.0.26
+start time: 1741010822043
+local preference: 289
+end time: 1741010822044
+Time: 1 ms
+--------------------------------------------------
+received prefix: 10.0.0.26
+start time: 1741010822059
+local preference: 289
+end time: 1741010822060
+Time: 1 ms
+--------------------------------------------------
+received prefix: 10.0.0.25
+start time: 1741010822142
+local preference: 289
+end time: 1741010822142
+Time: 0 ms
+--------------------------------------------------
+received prefix: 10.0.0.25
+start time: 1741010822154
+local preference: 289
+end time: 1741010822154
+Time: 0 ms
+--------------------------------------------------
+received prefix: 10.0.0.25
+start time: 1741010822174
+local preference: 289
+end time: 1741010822174
+Time: 0 ms
+--------------------------------------------------
+received prefix: 10.0.0.25
+start time: 1741010822189
+local preference: 289
+end time: 1741010822190
+Time: 1 ms
+--------------------------------------------------
+received prefix: 10.0.0.25
+start time: 1741010822206
+local preference: 289
+end time: 1741010822207
+Time: 1 ms
+--------------------------------------------------
+received prefix: 10.0.0.21
+start time: 1741010822264
+local preference: 289
+end time: 1741010822265
+Time: 1 ms
+--------------------------------------------------
+received prefix: 10.0.0.21
+start time: 1741010822299
+local preference: 289
+end time: 1741010822300
+Time: 1 ms
+--------------------------------------------------
+received prefix: 10.0.0.21
+start time: 1741010822301
+local preference: 289
+end time: 1741010822302
+Time: 1 ms
+--------------------------------------------------
+received prefix: 10.0.0.21
+start time: 1741010822310
+local preference: 289
+end time: 1741010822310
+Time: 0 ms
+--------------------------------------------------
+received prefix: 10.0.0.21
+start time: 1741010822315
+local preference: 289
+end time: 1741010822315
+Time: 0 ms
+--------------------------------------------------
+received prefix: 10.0.0.22
+start time: 1741010822455
+local preference: 289
+end time: 1741010822456
+Time: 1 ms
+--------------------------------------------------
+received prefix: 10.0.0.22
+start time: 1741010822468
+local preference: 289
+end time: 1741010822468
+Time: 0 ms
+--------------------------------------------------
+received prefix: 10.0.0.22
+start time: 1741010822482
+local preference: 289
+end time: 1741010822484
+Time: 2 ms
+--------------------------------------------------
+received prefix: 10.0.0.22
+start time: 1741010822519
+local preference: 289
+end time: 1741010822519
+Time: 0 ms
+--------------------------------------------------
+received prefix: 10.0.0.22
+start time: 1741010822528
+local preference: 289
+end time: 1741010822529
+Time: 1 ms
+--------------------------------------------------
+received prefix: 10.0.0.20
+start time: 1741010822600
+local preference: 289
+end time: 1741010822602
+Time: 2 ms
+--------------------------------------------------
+received prefix: 10.0.0.20
+start time: 1741010822630
+local preference: 289
+end time: 1741010822632
+Time: 2 ms
+--------------------------------------------------
+received prefix: 10.0.0.20
+start time: 1741010822647
+local preference: 289
+end time: 1741010822647
+Time: 0 ms
+--------------------------------------------------
+received prefix: 10.0.0.20
+start time: 1741010822649
+local preference: 289
+end time: 1741010822649
+Time: 0 ms
+--------------------------------------------------
+received prefix: 10.0.0.20
+start time: 1741010822651
+local preference: 289
+end time: 1741010822652
+Time: 1 ms
+--------------------------------------------------
+received prefix: 10.0.0.13
+start time: 1741010822760
+local preference: 290
+end time: 1741010822762
+Time: 2 ms
+--------------------------------------------------
+received prefix: 10.0.0.13
+start time: 1741010822780
+local preference: 290
+end time: 1741010822781
+Time: 1 ms
+--------------------------------------------------
+received prefix: 10.0.0.13
+start time: 1741010822782
+local preference: 290
+end time: 1741010822783
+Time: 1 ms
+--------------------------------------------------
+received prefix: 10.0.0.13
+start time: 1741010822784
+local preference: 290
+end time: 1741010822785
+Time: 1 ms
+--------------------------------------------------
+received prefix: 10.0.0.13
+start time: 1741010822798
+local preference: 289
+end time: 1741010822799
+Time: 1 ms
+--------------------------------------------------
+received prefix: 10.0.0.14
+start time: 1741010822891
+local preference: 289
+end time: 1741010822892
+Time: 1 ms
+--------------------------------------------------
+received prefix: 10.0.0.14
+start time: 1741010822921
+local preference: 289
+end time: 1741010822923
+Time: 2 ms
+--------------------------------------------------
+received prefix: 10.0.0.14
+start time: 1741010822944
+local preference: 289
+end time: 1741010822945
+Time: 1 ms
+--------------------------------------------------
+received prefix: 10.0.0.14
+start time: 1741010822948
+local preference: 289
+end time: 1741010822949
+Time: 1 ms
+--------------------------------------------------
+received prefix: 10.0.0.14
+start time: 1741010822953
+local preference: 289
+end time: 1741010822953
+Time: 0 ms
+--------------------------------------------------
+received prefix: 10.0.0.11
+start time: 1741010823074
+local preference: 290
+end time: 1741010823075
+Time: 1 ms
+--------------------------------------------------
+received prefix: 10.0.0.11
+start time: 1741010823101
+local preference: 290
+end time: 1741010823102
+Time: 1 ms
+--------------------------------------------------
+received prefix: 10.0.0.11
+start time: 1741010823113
+local preference: 290
+end time: 1741010823114
+Time: 1 ms
+--------------------------------------------------
+received prefix: 10.0.0.11
+start time: 1741010823124
+local preference: 290
+end time: 1741010823124
+Time: 0 ms
+--------------------------------------------------
+received prefix: 10.0.0.11
+start time: 1741010823129
+local preference: 290
+end time: 1741010823129
+Time: 0 ms
+--------------------------------------------------
+received prefix: 10.0.0.7
+start time: 1741010823230
+local preference: 289
+end time: 1741010823233
+Time: 3 ms
+--------------------------------------------------
+received prefix: 10.0.0.7
+start time: 1741010823250
+local preference: 289
+end time: 1741010823250
+Time: 0 ms
+--------------------------------------------------
+received prefix: 10.0.0.7
+start time: 1741010823268
+local preference: 289
+end time: 1741010823269
+Time: 1 ms
+--------------------------------------------------
+received prefix: 10.0.0.7
+start time: 1741010823273
+local preference: 289
+end time: 1741010823274
+Time: 1 ms
+--------------------------------------------------
+received prefix: 10.0.0.8
+start time: 1741010823406
+local preference: 289
+end time: 1741010823406
+Time: 0 ms
+--------------------------------------------------
+received prefix: 10.0.0.8
+start time: 1741010823451
+local preference: 289
+end time: 1741010823452
+Time: 1 ms
+--------------------------------------------------
+received prefix: 10.0.0.8
+start time: 1741010823453
+local preference: 289
+end time: 1741010823454
+Time: 1 ms
+--------------------------------------------------
+received prefix: 10.0.0.8
+start time: 1741010823466
+local preference: 289
+end time: 1741010823467
+Time: 1 ms
+--------------------------------------------------
+received prefix: 10.0.0.9
+start time: 1741010823557
+local preference: 289
+end time: 1741010823559
+Time: 2 ms
+--------------------------------------------------
+received prefix: 10.0.0.9
+start time: 1741010823562
+local preference: 289
+end time: 1741010823563
+Time: 1 ms
+--------------------------------------------------
+received prefix: 10.0.0.9
+start time: 1741010823589
+local preference: 289
+end time: 1741010823590
+Time: 1 ms
+--------------------------------------------------
+received prefix: 10.0.0.9
+start time: 1741010823615
+local preference: 289
+end time: 1741010823616
+Time: 1 ms
+--------------------------------------------------
+received prefix: 10.0.0.9
+start time: 1741010823617
+local preference: 289
+end time: 1741010823617
+Time: 0 ms
+--------------------------------------------------
+received prefix: 10.0.0.10
+start time: 1741010823701
+local preference: 289
+end time: 1741010823705
+Time: 4 ms
+--------------------------------------------------
+received prefix: 10.0.0.10
+start time: 1741010823714
+local preference: 289
+end time: 1741010823715
+Time: 1 ms
+--------------------------------------------------
+received prefix: 10.0.0.10
+start time: 1741010823719
+local preference: 289
+end time: 1741010823720
+Time: 1 ms
+--------------------------------------------------
+received prefix: 10.0.0.10
+start time: 1741010823726
+local preference: 289
+end time: 1741010823727
+Time: 1 ms
+--------------------------------------------------
+received prefix: 10.0.0.10
+start time: 1741010823737
+local preference: 289
+end time: 1741010823737
+Time: 0 ms
+--------------------------------------------------
+received prefix: 10.0.0.15
+start time: 1741010823822
+local preference: 289
+end time: 1741010823823
+Time: 1 ms
+--------------------------------------------------
+received prefix: 10.0.0.15
+start time: 1741010823825
+local preference: 289
+end time: 1741010823826
+Time: 1 ms
+--------------------------------------------------
+received prefix: 10.0.0.15
+start time: 1741010823870
+local preference: 289
+end time: 1741010823871
+Time: 1 ms
+--------------------------------------------------
+received prefix: 10.0.0.15
+start time: 1741010823876
+local preference: 289
+end time: 1741010823878
+Time: 2 ms
+--------------------------------------------------
+received prefix: 10.0.0.15
+start time: 1741010823888
+local preference: 289
+end time: 1741010823888
+Time: 0 ms
+--------------------------------------------------
+received prefix: 10.0.0.16
+start time: 1741010823980
+local preference: 289
+end time: 1741010823983
+Time: 3 ms
+--------------------------------------------------
+received prefix: 10.0.0.16
+start time: 1741010824011
+local preference: 289
+end time: 1741010824012
+Time: 1 ms
+--------------------------------------------------
+received prefix: 10.0.0.16
+start time: 1741010824014
+local preference: 289
+end time: 1741010824015
+Time: 1 ms
+--------------------------------------------------
+received prefix: 10.0.0.16
+start time: 1741010824035
+local preference: 289
+end time: 1741010824036
+Time: 1 ms
+--------------------------------------------------
+received prefix: 10.0.0.16
+start time: 1741010824049
+local preference: 289
+end time: 1741010824050
+Time: 1 ms
+--------------------------------------------------
+received prefix: 10.0.0.17
+start time: 1741010824168
+local preference: 289
+end time: 1741010824168
+Time: 0 ms
+--------------------------------------------------
+received prefix: 10.0.0.17
+start time: 1741010824178
+local preference: 289
+end time: 1741010824180
+Time: 2 ms
+--------------------------------------------------
+received prefix: 10.0.0.17
+start time: 1741010824189
+local preference: 289
+end time: 1741010824190
+Time: 1 ms
+--------------------------------------------------
+received prefix: 10.0.0.17
+start time: 1741010824215
+local preference: 289
+end time: 1741010824217
+Time: 2 ms
+--------------------------------------------------
+received prefix: 10.0.0.17
+start time: 1741010824239
+local preference: 289
+end time: 1741010824240
+Time: 1 ms
+--------------------------------------------------
+received prefix: 10.0.0.18
+start time: 1741010824378
+local preference: 289
+end time: 1741010824379
+Time: 1 ms
+--------------------------------------------------
+received prefix: 10.0.0.18
+start time: 1741010824393
+local preference: 289
+end time: 1741010824395
+Time: 2 ms
+--------------------------------------------------
+received prefix: 10.0.0.18
+start time: 1741010824402
+local preference: 289
+end time: 1741010824402
+Time: 0 ms
+--------------------------------------------------
+received prefix: 10.0.0.18
+start time: 1741010824410
+local preference: 289
+end time: 1741010824411
+Time: 1 ms
+--------------------------------------------------
+received prefix: 10.0.0.18
+start time: 1741010824436
+local preference: 289
+end time: 1741010824439
+Time: 3 ms
+--------------------------------------------------
+received prefix: 10.0.0.19
+start time: 1741010824498
+local preference: 289
+end time: 1741010824499
+Time: 1 ms
+--------------------------------------------------
+received prefix: 10.0.0.19
+start time: 1741010824532
+local preference: 289
+end time: 1741010824532
+Time: 0 ms
+--------------------------------------------------
+received prefix: 10.0.0.19
+start time: 1741010824534
+local preference: 289
+end time: 1741010824535
+Time: 1 ms

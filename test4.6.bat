@@ -1,5 +1,5 @@
 start cmd /k "conda activate FED-GNN-BGP && python .\GlobalController.py --config .\config\5as32sw_0220\globalConfig.json"
-start cmd /k "conda activate FED-GNN-BGP && python LocalController.py --config .\config\5as32sw_0220\asConfig1.json"
+start cmd /k "conda activate FED-GNN-BGP && python LocalController.py --config .\config\5as32sw_0220\asConfig1.json > as1.log"
 start cmd /k "conda activate FED-GNN-BGP && python LocalController.py --config .\config\5as32sw_0220\asConfig2.json"
 start cmd /k "conda activate FED-GNN-BGP && python LocalController.py --config .\config\5as32sw_0220\asConfig3.json"
 start cmd /k "conda activate FED-GNN-BGP && python LocalController.py --config .\config\5as32sw_0220\asConfig4.json"
