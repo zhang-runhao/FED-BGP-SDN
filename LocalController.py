@@ -65,11 +65,12 @@ class LocalController:
                 if router_name in edge_nodes:
                     # print(f'Node {router_name}')
                     for neighbor in node.neighbors.keys():
-                        if neighbor in AS.router_id_int_to_str.keys():
-                            neighbor_name = AS.router_id_int_to_str[neighbor]
-                            # print(f'neighbor: {neighbor_name}')
-                            if neighbor_name in edge_nodes:
-                                print(f'{router_name} -> {neighbor_name} : {node.neighbors[neighbor][1]}')
+                        neighbor_name = self.global_topology.router_id_int_to_str[neighbor]
+                        # if neighbor in AS.router_id_int_to_str.keys():
+                        #     neighbor_name = AS.router_id_int_to_str[neighbor]
+                        #     # print(f'neighbor: {neighbor_name}')
+                        if neighbor_name in edge_nodes and neighbor_name in AS.router_id_int_to_str.values():
+                            print(f'{router_name} -> {neighbor_name} : {node.neighbors[neighbor][1]}')
             print('-----------------------------------')
 
 if __name__ == '__main__':
@@ -80,7 +81,7 @@ if __name__ == '__main__':
     config_file = args.config
     config = json.load(open(config_file, 'r'))
     ASN = int(config['ASN'])
-    torch.manual_seed(ASN*100)
+    torch.manual_seed(1000)
     print(f"This is Local Controller {ASN}")
     router_name_set = config['router_name_set']
     router_distance_dict = config['router_distance_dict']
@@ -207,7 +208,7 @@ if __name__ == '__main__':
                     # time_dict['inference_times'].append(end - start)
                     out = out.item()
                     out = int(out)
-                    out = 300 - out
+                    # out = 300 - out
                     if out < 0:
                         out = 0                                          
                     # print(f'Data received...')

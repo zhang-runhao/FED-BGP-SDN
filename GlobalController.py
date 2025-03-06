@@ -98,7 +98,15 @@ if __name__ == '__main__':
             print(f'new_id : {local_topology.list_of_all_Nodes[value].RouterID}, name : {global_controller.global_topology.router_id_int_to_str[router_count]}')
             
             router_count += 1
-            
+    
+    # 将本地拓扑存储的邻居信息转换为新的整数id
+    for local_topology in global_controller.global_topology.list_of_ASes.values():
+        for node in local_topology.list_of_all_Nodes.values():
+            neighbor_keys = list(node.neighbors.keys())
+            for neighbor in neighbor_keys:
+                neighbor_str = local_topology.router_id_int_to_str[neighbor]
+                node.neighbors[global_controller.global_topology.router_id_str_to_int[neighbor_str]] = node.neighbors.pop(neighbor)
+    
     # 初始化各个本地控制器ip
     for key, value in ASController_listen_addresses.items():
         global_controller.ASController_ip[int(key)] = [value['ip'], value['port']]
