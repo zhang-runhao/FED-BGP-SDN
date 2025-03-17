@@ -17,7 +17,8 @@ import argparse
 import time
 import keyboard
 import math
-
+import numpy as np
+import networkx as nx
 
 class LocalController:
     def __init__(self, ASN):
@@ -72,7 +73,38 @@ class LocalController:
                         if neighbor_name in edge_nodes and neighbor_name in AS.router_id_int_to_str.values():
                             print(f'{router_name} -> {neighbor_name} : {node.neighbors[neighbor][1]}')
             print('-----------------------------------')
+            
+    def local_topology_to_dict(self):
+        local_topology_dict = dict()
+        # print(f'local_topology.router_id_str_to_int: {self.local_topology.router_id_str_to_int}')
+        # print(f'local_topology.router_id_int_to_str: {self.local_topology.router_id_int_to_str}')
+        for node in self.local_topology.router_id_str_to_int.keys():
+            local_topology_dict[node] = dict()
+            for neighbor in self.local_topology.list_of_all_Nodes[self.local_topology.router_id_str_to_int[node]].neighbors.keys():
+                if neighbor in self.local_topology.router_id_int_to_str.keys():
+                    local_topology_dict[node][self.local_topology.router_id_int_to_str[neighbor]] = self.local_topology.list_of_all_Nodes[self.local_topology.router_id_str_to_int[node]].neighbors[neighbor][1]
+        return local_topology_dict
+    
+    def local_topology_in_global_topology_to_dict(self):
+        local_topology_in_global_topology_dict = dict()
+        local_topology_in_global_topology = self.global_topology.list_of_ASes[self.local_topology.ASN]
+        for node in local_topology_in_global_topology.router_id_str_to_int.keys():
+            local_topology_in_global_topology_dict[node] = dict()
+            for neighbor in local_topology_in_global_topology.list_of_all_Nodes[local_topology_in_global_topology.router_id_str_to_int[node]].neighbors.keys():
+                if neighbor in local_topology_in_global_topology.router_id_int_to_str.keys():
+                    local_topology_in_global_topology_dict[node][local_topology_in_global_topology.router_id_int_to_str[neighbor]] = local_topology_in_global_topology.list_of_all_Nodes[local_topology_in_global_topology.router_id_str_to_int[node]].neighbors[neighbor][1]
+        return local_topology_in_global_topology_dict
 
+def topo_dict_to_adj(topo_dict):
+    # 初始化邻接矩阵
+    adj = np.zeros((len(topo_dict), len(topo_dict)))
+    node_index = dict()
+    for i, key in enumerate(topo_dict.keys()):
+        node_index[key] = i
+    for key in topo_dict.keys():
+        for neighbor in topo_dict[key].keys():
+            adj[node_index[key]][node_index[neighbor]] = topo_dict[key][neighbor]
+    return adj
 if __name__ == '__main__':
     
     parser = argparse.ArgumentParser(description='Local Controller')
@@ -80,6 +112,9 @@ if __name__ == '__main__':
     args = parser.parse_args()
     config_file = args.config
     config = json.load(open(config_file, 'r'))
+    original_config_file = config_file[:-5] + '_ori.json'
+    original_config = json.load(open(original_config_file, 'r'))
+    original_router_distance_dict = original_config['router_distance_dict']
     ASN = int(config['ASN'])
     torch.manual_seed(1000)
     print(f"This is Local Controller {ASN}")
@@ -160,9 +195,60 @@ if __name__ == '__main__':
             print(f'Error: {e}')
             
     # 打印本地拓扑的边链路
-    local_controller.print_local_topology_edge_links(router_distance_dict)
+    # local_controller.print_local_topology_edge_links(router_distance_dict)
     # 打印全局拓扑的边链路
-    local_controller.print_global_topology_edge_links()
+    # local_controller.print_global_topology_edge_links()
+    # 打印本地拓扑字典
+    # print(f"local_topology_dict: {router_distance_dict}")
+    local_topology_dict = local_controller.local_topology_to_dict()
+    # print(f'local_topology_in_global_topology_dict: {local_topology_dict}')
+    ori_topo_dict = original_router_distance_dict
+    # 将本地拓扑字典转换为邻接矩阵
+    local_adj = topo_dict_to_adj(router_distance_dict)
+    # print(f'local_adj: {local_adj}')
+    local_in_global_adj = topo_dict_to_adj(local_topology_dict)
+    # print(f'local_in_global_adj: {local_in_global_adj}')
+    ori_adj = topo_dict_to_adj(ori_topo_dict)
+    # matrix to nx graph
+    local_G = nx.from_numpy_array(local_adj)
+    local_in_global_G = nx.from_numpy_array(local_in_global_adj)
+    ori_G = nx.from_numpy_array(ori_adj)
+    # 计算矩阵余弦相似度
+    # cos_sim = np.dot(local_adj.flatten(), local_in_global_adj.flatten()) / (np.linalg.norm(local_adj.flatten()) * np.linalg.norm(local_in_global_adj.flatten))
+    # print(f'cosine similarity: {cos_sim}')
+    # cos_sim_ori = np.dot(local_in_global_adj.flatten(), ori_adj.flatten()) / (np.linalg.norm(local_in_global_adj.flatten()) * np.linalg.norm(ori_adj.flatten))
+    # print(f'cosine similarity with original: {cos_sim_ori}')
+    # 计算欧式距离
+    euclidean_distance = np.linalg.norm(local_adj - local_in_global_adj)
+    print(f'euclidean distance: {euclidean_distance}')
+    euclidean_distance_ori = np.linalg.norm(local_in_global_adj - ori_adj)
+    print(f'euclidean distance with original: {euclidean_distance_ori}')
+    # 计算皮尔逊相关系数
+    pearson_correlation, _ = np.corrcoef(local_adj.flatten(), local_in_global_adj.flatten())
+    print(f'pearson correlation: {pearson_correlation[1]}')
+    pearson_correlation_ori, _ = np.corrcoef(local_in_global_adj.flatten(), ori_adj.flatten())
+    print(f'pearson correlation with original: {pearson_correlation_ori[1]}')
+    # 计算最大共同子图比例
+    max_common_subgraph = nx.graph_edit_distance(local_G, local_in_global_G)
+    max_size = max(len(local_G.nodes) + len(local_G.edges), len(local_in_global_G.nodes) + len(local_in_global_G.edges))
+    max_common_subgraph_ratio = 1 - max_common_subgraph / max_size 
+    print(f'max common subgraph ratio: {max_common_subgraph_ratio}')
+    max_common_subgraph_ori = nx.graph_edit_distance(local_in_global_G, ori_G)
+    max_size_ori = max(len(local_in_global_G.nodes) + len(local_in_global_G.edges), len(ori_G.nodes) + len(ori_G.edges))
+    max_common_subgraph_ratio_ori = 1 - max_common_subgraph_ori / max_size_ori
+    print(f'max common subgraph ratio with original: {max_common_subgraph_ratio_ori}')
+    # 计算SVD相似度
+    u, s, vh = np.linalg.svd(local_adj)
+    u_in_global, s_in_global, vh_in_global = np.linalg.svd(local_in_global_adj)
+    svd_similarity = np.dot(u.flatten(), u_in_global.flatten()) / (np.linalg.norm(u) * np.linalg.norm(u_in_global))
+    print(f'SVD similarity: {svd_similarity}')
+    u_ori, s_ori, vh_ori = np.linalg.svd(ori_adj)
+    svd_similarity_ori = np.dot(u_in_global.flatten(), u_ori.flatten()) / (np.linalg.norm(u_in_global) * np.linalg.norm(u_ori))
+    print(f'SVD similarity with original: {svd_similarity_ori}')
+    
+    # 将全局拓扑中的本地拓扑转换为字典
+    # local_topology_in_global_topology_dict = local_controller.local_topology_in_global_topology_to_dict()
+    # print(f'local_topology_in_global_topology_dict: {local_topology_in_global_topology_dict}')
     # 加载模型
     model = GraphNN.Net()
     model.eval()
